@@ -17,6 +17,11 @@ inputCountry.addEventListener(
 function handlerCountry(event) {
   event.preventDefault();
   const name = inputCountry.value.trim();
+  if (!name) {
+    Notiflix.Notify.failure('Oops, there is no country with that name');
+    return;
+  }
+
   fetchCountries(name)
     .then(countries => {
       infoCountry.innerHTML = ' ';
@@ -39,7 +44,7 @@ function handlerCountry(event) {
     })
     .catch(error => {
       console.error(error);
-      //inputCountry.style.backgroundColor = 'red';
+
       inputCountry.style.boxShadow = '5px 5px 5px red';
       inputCountry.style.color = 'red';
       Notiflix.Notify.failure('Oops, there is no country with that name');
